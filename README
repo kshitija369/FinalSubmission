@@ -1,0 +1,52 @@
+
+DIRECTORY CONTENT:
+
+1. CrossValidate.py
+2. FeatureSelection-S2N.py
+3. svm.py
+4. BalancedError.py
+5. Prediction of Test dataset - ‘testpred’
+6. README
+7. Output screenshot
+
+————————————————————————————————————————————————————————
+
+STEPS TO RUN THE ALGORITHM:
+
+1.	Download train dataset, test dataset, train labels.
+
+2. 	Rename train dataset file to 'traindata.data'
+	Rename test dataset file to 'testdata'
+	Rename train labels file to 'train.labels'
+
+3. 	Create directory named as 'Dataset' in the current location and copy all the above file to 'Dataset' folder.	
+
+3.	Generate dataset for cross-validation, by 'CrossValidate.py' script.
+	The script generates 10 CV-datasets each consisting of 90% of the actual data.
+
+	Usage:	python CrossValidate.py Dataset/ 
+
+
+4. 	Perform feature selection using 'FeatureSelection-S2N.py' script.
+	The script implements feature ranking algorithm using Signal to Noise ratio(SNR). 
+	Only 1 set of CV dataset is used for feature ranking to avoid over-fitting.
+
+	Usage:	python FeatureSelection-S2N.py Dataset/
+
+	
+5. 	Perform classification using 'svm.py' script.
+	The script performs following tasks:
+	i)	List the Column numbers of selected features.
+	ii)	Fits sklearn.svm.SVC classification model on 10 Cross-Validation(CV) datasets.
+	iii)	Predicts class for left-out (CV) dataset and saves this prediction to ‘pred’ file.
+	iv)	Using the fitted model performs classification on the Test dataset and saves it to the file 'testpred'.
+
+	Usage:	python svm.py Dataset/ 20
+
+
+6.	To calculate Cross-Validation or Training error, use 'BalancedError.py' script.
+	The script outputs Average Balanced Error Rate(BER) of all 10 dataset.
+
+	Usage: python BalancedError.py Dataset/
+
+		
