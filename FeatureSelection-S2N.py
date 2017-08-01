@@ -95,9 +95,9 @@ for i in range(0, cols, 1):
    
 ### Calculate SNR for each feature ###
 for j in range(0, cols, 1):
-     snr[j] = (m0[j] - m1[j])/(s0[j] - s1[j])
+     snr[j] = abs((m0[j] - m1[j])/(s0[j] - s1[j]))
      
-idx = sorted(range(len(snr)), key=lambda k: snr[k])
+idx = sorted(range(len(snr)), key=lambda k: snr[k], reverse = True)
 
 f = open("Dataset/rank_snr", "w")
 for j in range(0, cols, 1):
